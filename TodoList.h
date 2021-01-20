@@ -4,15 +4,27 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <vector>
 #include "TodoListInterface.h"
 
 using namespace std;
 
 class TodoList: public TodoListInterface {
 public:
+    vector <string> tasks;
     TodoList() {
         cout << "In Constructor" << endl;
-				ifstream in
+        ifstream infile ("TODOList.txt");
+        string line;
+        if (infile.is_open())
+        {
+            while ( getline (infile, line))
+            {
+                cout << line << '\n';
+                tasks.push_back(line);
+            }
+            infile.close();
+        }
     }
 
     virtual ~TodoList() {
